@@ -1,0 +1,25 @@
+file:
+  uploadDir: documento/src/main/resources/uploads
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Brazil/East
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+server:
+  port: 8081
+
+logging:
+  level:
+    root: INFO
+    com.example.mypackage: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
