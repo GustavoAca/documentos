@@ -3,7 +3,6 @@ name: Continuos Integration
 on:
   push:
     branches:
-      - main
       - 'G*'
 
 jobs:
