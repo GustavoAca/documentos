@@ -67,11 +67,15 @@ jobs:
           USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: echo "#Galasdalas50" | docker login -u "gacacio" --password-stdin
 
+      - name: extrair versão do pom
+        id: extract_version
+        run: echo "PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
       - name: Build imagem docker
         run: |
-          docker build . --file Dockerfile --tag documento:latest
+          docker build . --file Dockerfile --tag documento:${{ env.PROJECT_VERSION }}
 
       - name: Deploy image
         run: |
-          docker tag documento:latest gacacio/documento:latest
-          docker push gacacio/documento:latest
+          docker tag documento:${{ env.PROJECT_VERSION }} gacacio/documento:${{ env.PROJECT_VERSION }}
+          docker push gacacio/documento:${{ env.PROJECT_VERSION }}
